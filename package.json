@@ -1,6 +1,6 @@
 {
   "name": "draft-js-plugin-editor-toolbar-picker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Picker component for `draft-js-static-toolbar-plugin` and `draft-js-inline-toolbar-plugin`",
   "main": "lib/",
   "types": "lib/",
@@ -43,9 +43,11 @@
     "reeasy": "^0.5.14",
     "rimraf": "^2.6.2",
     "style-loader": "^0.18.2",
-    "styled-components": "^2.1.2",
     "tslint": "^5.7.0",
     "tslint-react": "^3.2.0",
     "typescript": "^2.5.2"
+  },
+  "dependencies": {
+    "styled-components": "^2.1.2"
   }
 }
