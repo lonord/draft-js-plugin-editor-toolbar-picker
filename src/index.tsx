@@ -27,10 +27,10 @@ export default function createPicker(options: PickOptions) {
 			window.removeEventListener('click', this.onWindowClick)
 		}
 
-		onWindowClick = () =>
-			// Call `onOverrideContent` again with `undefined`
-			// so the toolbar can show its regular content again.
+		onWindowClick = () => {
 			this.props.onOverrideContent(undefined)
+			d('Hide sub menu')
+		}
 
 		render() {
 			return (
@@ -48,7 +48,10 @@ export default function createPicker(options: PickOptions) {
 	return ({ onOverrideContent }) => {
 		const Trigger = options.triggerItem as any
 		return (
-			<Trigger onClick={() => onOverrideContent(Picker)}/>
+			<Trigger onClick={() => {
+				onOverrideContent(Picker)
+				d('Show sub menu')
+			}} />
 		)
 	}
 }
