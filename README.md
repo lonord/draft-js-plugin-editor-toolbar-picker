@@ -34,6 +34,11 @@ const Picker = createPicker({
 		HeadlineTwoButton,
 		HeadlineThreeButton
 	]
+	/* 
+	other options:
+	autoClose: boolean -> Auto close if click another location, default `true`
+	closeButton: ReactNode -> Close button when `autoClose` is `false`
+	*/
 })
 
 const toolbarPlugin = createToolbarPlugin({

@@ -4,17 +4,20 @@ import * as React from 'react'
 import createTriggerButton from './util/trigger-button'
 
 const d = debug('draft-js-plugin-editor-toolbar-picker')
-const CloseButton = createTriggerButton({ child: <CloseIcon/> })
 
 export interface PickOptions {
 	triggerItem: React.ReactNode
-	items: React.ReactNode[]
+	items: React.ReactNode[],
+	autoClose?: boolean,
+	closeButton?: React.ReactNode
 }
 
 export default function createPicker(options: PickOptions) {
 	options = {
 		triggerItem: createTriggerButton({ child: 'Button' }),
 		items: [],
+		autoClose: true,
+		closeButton: createTriggerButton({ child: <CloseIcon /> }),
 		...options
 	}
 
@@ -33,13 +36,21 @@ export default function createPicker(options: PickOptions) {
 		}
 
 		render() {
+			const CloseButton = options.closeButton as any
 			return (
 				<div>
-					{options.items.map((Button: any, index) => (
-						<Button key={index} {...this.props}/>
-					))}
-					<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-					<CloseButton onClick={this.onWindowClick} theme={this.props.theme}/>
+					<span onClick={e => e.stopPropagation()}>
+						{options.items.map((Button: any, index) => (
+							<Button key={index} {...this.props} />
+						))}
+					</span>
+					{options.autoClose
+						? null
+						: <span>
+							<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+							<CloseButton onClick={this.onWindowClick} theme={this.props.theme} />
+						</span>
+					}
 				</div>
 			)
 		}
