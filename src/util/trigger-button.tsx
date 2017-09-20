@@ -15,6 +15,8 @@ const Button = styled.button`
 	height: 34px;
 	min-width: 36px;
 	fill: #888;
+	cursor: pointer;
+	outline: none;
 
 	&:hover,
 	&:focus {
@@ -26,10 +28,16 @@ export interface TriggerButtonOptions {
 	child?: React.ReactNode
 }
 
-export default function createTriggerButton(options: TriggerButtonOptions) {
-	return ({ onClick }) => (
-		<Wrapper>
-			<Button onClick={onClick}>{options.child || ''}</Button>
-		</Wrapper>
-	)
+export default function createTriggerButton(options: TriggerButtonOptions): React.StatelessComponent<any> {
+	return ({ onClick, theme }) => {
+		return theme ? (
+			<div className={theme.buttonWrapper}>
+				<button onClick={onClick} className={theme.button}>{options.child || ''}</button>
+			</div>
+		) : (
+			<Wrapper>
+				<Button onClick={onClick}>{options.child || ''}</Button>
+			</Wrapper>
+		)
+	}
 }

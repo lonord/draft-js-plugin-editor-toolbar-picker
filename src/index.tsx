@@ -39,19 +39,19 @@ export default function createPicker(options: PickOptions) {
 						<Button key={index} {...this.props}/>
 					))}
 					<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-					<CloseButton onClick={this.onWindowClick}/>
+					<CloseButton onClick={this.onWindowClick} theme={this.props.theme}/>
 				</div>
 			)
 		}
 	}
 
-	return ({ onOverrideContent }) => {
+	return ({ onOverrideContent, theme }) => {
 		const Trigger = options.triggerItem as any
 		return (
 			<Trigger onClick={() => {
 				onOverrideContent(Picker)
 				d('Show sub menu')
-			}} />
+			}} theme={theme} />
 		)
 	}
 }
