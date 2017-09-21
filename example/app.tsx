@@ -99,6 +99,7 @@ interface AppState {
 
 class App extends React.Component<any, AppState> {
 
+	selection: SelectionState
 	editor = null
 
 	state: AppState = {
@@ -106,8 +107,24 @@ class App extends React.Component<any, AppState> {
 	}
 
 	handleChange = (editorState: EditorState) => {
+		d('editorState updated')
+		const sel = editorState.getSelection()
+		if (!this.selection || !(this.selection.getStartKey() === sel.getStartKey()
+			&& this.selection.getStartOffset() === sel.getStartOffset()
+			&& this.selection.getEndKey() === sel.getEndKey()
+			&& this.selection.getEndOffset() === sel.getEndOffset())) {
+			d('select changed -> start key: %s, start offset: %d, end key: %s, end offset: %d',
+				sel.getStartKey(), sel.getStartOffset(),
+				sel.getEndKey(), sel.getEndOffset())
+		}
+		this.selection = sel
 		this.setState({
 			editorState
+		}, () => {
+			// Set state twice to solve the problem: https://github.com/draft-js-plugins/draft-js-plugins/issues/311
+			this.setState({
+				editorState
+			})
 		})
 	}
 
