@@ -23,14 +23,14 @@ export default function createPicker(options: PickOptions) {
 
 	class Picker extends React.Component<any, any> {
 		componentDidMount() {
-			setTimeout(() => { window.addEventListener('click', this.onWindowClick) })
+			setTimeout(() => { window.addEventListener('click', this.handleClose) })
 		}
 
 		componentWillUnmount() {
-			window.removeEventListener('click', this.onWindowClick)
+			window.removeEventListener('click', this.handleClose)
 		}
 
-		onWindowClick = () => {
+		handleClose = () => {
 			this.props.onOverrideContent(undefined)
 			d('Hide sub menu')
 		}
@@ -41,14 +41,14 @@ export default function createPicker(options: PickOptions) {
 				<div>
 					<span onClick={e => e.stopPropagation()}>
 						{options.items.map((Button: any, index) => (
-							<Button key={index} {...this.props} />
+							<Button key={index} onPickerClose={this.handleClose} {...this.props}/>
 						))}
 					</span>
 					{options.autoClose
 						? null
 						: <span>
 							<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-							<CloseButton onClick={this.onWindowClick} theme={this.props.theme} />
+							<CloseButton onClick={this.handleClose} theme={this.props.theme} />
 						</span>
 					}
 				</div>

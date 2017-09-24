@@ -68,12 +68,21 @@ const Button = styled.button`
     }
 `
 
+const CloseTriggerButton = createTriggerButton({ child: 'Close' })
+
+const CustomCloseButton = ({ onPickerClose }) => {
+	return (
+		<CloseTriggerButton onClick={onPickerClose}/>
+	)
+}
+
 const Picker = createPicker({
 	triggerItem: createTriggerButton({ child: 'H' }),
 	items: [
 		HeadlineOneButton,
 		HeadlineTwoButton,
-		HeadlineThreeButton
+		HeadlineThreeButton,
+		CustomCloseButton
 	]
 })
 
