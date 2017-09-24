@@ -1,6 +1,6 @@
 {
   "name": "draft-js-plugin-editor-toolbar-picker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Picker component for `draft-js-static-toolbar-plugin` and `draft-js-inline-toolbar-plugin`",
   "main": "lib/",
   "types": "lib/",
