@@ -20,6 +20,7 @@ import {
 import Editor from 'draft-js-plugins-editor'
 import createToolbarPlugin, { Separator } from 'draft-js-static-toolbar-plugin'
 import * as React from 'react'
+import createRenderOrderFixer from 'react-render-order-fixer'
 import styled, { injectGlobal } from 'styled-components'
 
 import createPicker, { createTriggerButton } from '../src/'
@@ -100,7 +101,10 @@ const toolbarPlugin = createToolbarPlugin({
 		CodeBlockButton
 	]
 })
-const { Toolbar } = toolbarPlugin
+
+const renderOrderFixer = createRenderOrderFixer()
+const Toolbar = renderOrderFixer.withOrderFixer(toolbarPlugin.Toolbar)
+const { ReRenderTrigger } = renderOrderFixer
 
 interface AppState {
 	editorState: EditorState
@@ -129,11 +133,6 @@ class App extends React.Component<any, AppState> {
 		this.selection = sel
 		this.setState({
 			editorState
-		}, () => {
-			// Set state twice to solve the problem: https://github.com/draft-js-plugins/draft-js-plugins/issues/311
-			this.setState({
-				editorState
-			})
 		})
 	}
 
@@ -153,6 +152,7 @@ class App extends React.Component<any, AppState> {
 						plugins={[toolbarPlugin]}
 						editorState={this.state.editorState}
 						onChange={this.handleChange} />
+					<ReRenderTrigger/>
 				</Wrapper>
 				<Button onClick={this.handleLogState}>Log State</Button>
 			</Main>

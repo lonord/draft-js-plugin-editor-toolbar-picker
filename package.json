@@ -39,6 +39,7 @@
     "normalize.css": "^7.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-render-order-fixer": "^1.0.0",
     "reeasy": "^0.5.14",
     "rimraf": "^2.6.2",
     "style-loader": "^0.18.2",
