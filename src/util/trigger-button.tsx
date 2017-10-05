@@ -11,7 +11,7 @@ const Button = styled.button`
 	font-size: 18px;
 	border: 0;
 	padding-top: 5px;
-	vertical-align: bottom;
+	vertical-align: text-bottom;
 	height: 34px;
 	min-width: 36px;
 	fill: #888;
