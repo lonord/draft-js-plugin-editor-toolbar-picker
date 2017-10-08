@@ -62,7 +62,7 @@ export default function createPicker(options: PickOptions) {
 			<Trigger onClick={() => {
 				onOverrideContent(Picker)
 				d('Show sub menu')
-			}} theme={theme} />
+			}} theme={theme} onOverrideContent={onOverrideContent} />
 		)
 	}
 }
